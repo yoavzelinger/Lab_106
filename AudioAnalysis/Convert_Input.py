@@ -25,7 +25,6 @@ def convert_input(input_lst):
     :param input_lst: [source type, flag {f=folder, d=directory, r=recursive}, source, destination (optional, def=same)]
     """
     input_type = input_lst[1].upper()
-    print(input_type)
     if input_type not in ["MP4", "AAC"]:
         print(f"Invalid input type: {input_type}")
         return
