@@ -61,4 +61,5 @@ def convert_input(input_lst):
 
 
 if __name__ == "__main__":
+    print("Welcome")
     convert_input(sys.argv)
