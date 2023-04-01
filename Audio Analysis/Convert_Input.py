@@ -1,4 +1,3 @@
-from moviepy.editor import *
 import ffmpeg
 import sys
 import os
