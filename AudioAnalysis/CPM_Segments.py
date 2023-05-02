@@ -2,7 +2,7 @@ from pydub import AudioSegment
 import math
 import struct
 
-SEGMENT_SIZE = 100  # ms
+SEGMENT_SIZE = 600000  # ms
 WIDTH = 2   # 2*8 bit
 CHANNELS = 1
 BIT_RATE = 48000
