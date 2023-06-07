@@ -1,5 +1,7 @@
 import NoiseRemoval
-import AutoEncoder
+from AutoEncoder import Autoencoder
+import os
+import numpy as np
 
 LEARNING_RATE = 0.0005
 BATCH_SIZE = 64
@@ -8,8 +10,9 @@ INPUT_FOLDER = ""
 WINDOW = 5000    # ms
 OVERLAP = 1000  # ms
 
+
 def receive_clean_audio(input_path):
-    noise_remover = NoiseRemover()
+    noise_remover = NoiseRemoval.NoiseRemover()
     return noise_remover.apply_filter(input_path)[0] # Clean cell
 
 
@@ -26,14 +29,14 @@ def window_time_array(audio, window_ms, overlap_ms):
 
 
 def create_train(input_folder, window_ms, overlap_ms):
-    x_train = []
+    train = []
     for root, _, file_names in os.walk(input_folder):
         for file_name in file_names:
             file_path = os.path.join(root, file_name)
             clean_audio = receive_clean_audio(file_path)
             frame_seperated = window_time_array(clean_audio, window_ms, overlap_ms)
-            x_train.append(frame_seperated)
-    return np.array(x_train)
+            train.append(frame_seperated)
+    return np.array(train)
 
 
 if __name__ == "__main__":
@@ -46,4 +49,4 @@ if __name__ == "__main__":
     )
     autoencoder.compile_model(LEARNING_RATE)
     x_train = create_train(INPUT_FOLDER, WINDOW, OVERLAP)
-    autoencoder.fit_model(x_train, BATCH_SIZE, EPOCHS)
+    autoencoder.train_model(x_train, BATCH_SIZE, EPOCHS)

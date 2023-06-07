@@ -1,15 +1,27 @@
-from tensorflow.keras import Model
-from tensorflow.keras.layers import Input, Conv2D, ReLU, BatchNormalization, \
+from keras import Model
+from keras.layers import Input, Conv2D, ReLU, BatchNormalization, \
     Flatten, Dense, Reshape, Conv2DTranspose, Activation
-from tensorflow.keras import backend as k
-from tensorflow.keras.optimizers import Adam
-from tensorflow.keras.losses import MeanSquaredError as Mse
+from keras import backend as k
+from keras.optimizers import Adam
+from keras.losses import MeanSquaredError as Mse
 import numpy as np
+import pickle
+import os
+
+
+def load_model(load_folder):
+    parameters_path = os.path.join(load_folder, "parameters.pkl")
+    with open(parameters_path, "rb") as f:
+        parameters = pickle.load(f)
+    autoencoder = Autoencoder(*parameters)
+    weights_path = os.path.join(load_folder, "weights.h5")
+    autoencoder.total_model.load_weights(weights_path)
+    return autoencoder
 
 
 class Autoencoder:
     def __init__(self, input_shape, conv_filters, conv_kernels, conv_strides, latent_space_dim):
-
+        self._input_shape = input_shape
         self._model_input = Input(shape=input_shape, name="encoder_input")
         self._shape_before_bottleneck = None
         self.latent_space_dim = latent_space_dim
@@ -27,19 +39,29 @@ class Autoencoder:
         self.decoder = self._create_decoder()
 
         # Adding it all together
-        self.auto_encoder = self._create_total_model()
+        self.total_model = self._create_total_model()
 
     def summary(self):
         self.encoder.summary()
         self.decoder.summary()
-        self.auto_encoder.summary()
+        self.total_model.summary()
 
     def compile_model(self, learning_rate=0.0001):
         optimizer, loss = Adam(learning_rate=learning_rate), Mse()
-        self.auto_encoder.compile(optimizer=optimizer, loss=loss)
+        self.total_model.compile(optimizer=optimizer, loss=loss)
 
     def train_model(self, x_train, batch_size, epochs_count):
-        self.auto_encoder.fit(x=x_train, y=x_train, batch_size=batch_size, epochs=epochs_count)
+        self.total_model.fit(x=x_train, y=x_train, batch_size=batch_size, epochs=epochs_count)
+
+    def save_model(self, save_folder):
+        if not os.path.exists(save_folder):
+            os.makedirs(save_folder)
+        parameters = [self._input_shape, self.encoder_filters, self.encoder_kernels, self.encoder_strides,self.latent_space_dim]
+        save_path = os.path.join(save_folder, "parameters.pkl")
+        with open(save_path, "wb") as f:
+            pickle.dump(parameters, f)
+        save_path = os.path.join(save_folder, "weights.h5")
+        self.total_model.save_weights(save_path)
 
     def _create_total_model(self):
         model_input = self._model_input
