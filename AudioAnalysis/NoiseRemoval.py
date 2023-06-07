@@ -6,8 +6,8 @@ import matplotlib.pyplot as plt
 class NoiseRemover:
     def __init__(self):
         self.wind_frequencies = [(65, 500), (8000, 9000), (9100, 9300), (15780, 24000)]
-        self.wind_frequences.sort()
-        self.keeping_frequencies = self._get_complement_frequencies()
+        self.wind_frequencies.sort()
+        self.clean_frequencies = self._get_complement_frequencies()
 
     def _get_complement_frequencies(self, gap=24000):
         complement_frequencies = []
