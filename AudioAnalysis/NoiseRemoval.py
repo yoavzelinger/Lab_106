@@ -22,9 +22,9 @@ class NoiseRemover:
 
     def apply_filter(self, input_path):
         audio = self._input_to_audio_array(input_path)
-        clean_array = self._filer_frequencies(audio, self.clean_frequencies)
-        wind_array = self._filer_frequencies(audio, self.wind_frequencies)
-        return clean_array, wind_array
+        clean_audio = self._filer_frequencies(audio, self.clean_frequencies)
+        wind_audio = self._filer_frequencies(audio, self.wind_frequencies)
+        return clean_audio, wind_audio
 
     def _input_to_audio_array(self, file_path, file_format="aac", start_time=0, end_time=-1):
         audio = AudioSegment.from_file(file_path, format=file_format)
@@ -39,7 +39,7 @@ class NoiseRemover:
         frequencies, magnitudes = self._get_frequencies_magnitudes(audio)
         remove_mask = self._apply_mask(frequencies, audio.frame_rate, frequencies_to_keep)
         filtered_magnitudes = magnitudes * remove_mask
-        return self._get_samples(filtered_magnitudes)
+        return self._get_audio(filtered_magnitudes)
 
     def _get_frequencies_magnitudes(self, audio, scaling=1):
         samples = audio.get_array_of_samples()
@@ -47,8 +47,9 @@ class NoiseRemover:
         magnitudes = np.fft.fft(samples) * scaling
         return frequencies, magnitudes
 
-    def _get_samples(self, magnitudes):
-        return np.fft.ifft(magnitudes).real.astype(np.int16)
+    def _get_audio(self, magnitudes):
+        samples_array = np.fft.ifft(magnitudes).real.astype(np.int16)
+        return AudioSegment(samples_array.tobytes(), frame_rate=48000, sample_width=2, channels=1)
 
     def _apply_mask(self, frequencies, sample_rate, ranges_to_remove):
         frequency_resolution = sample_rate / len(frequencies)
@@ -63,16 +64,15 @@ class NoiseRemover:
         plt.plot(np.abs(frequencies), np.abs(magnitudes))
         plt.show()
 
-    def save_to_file(self, samples_array, output_path, format="aac"):
-        audio_file = AudioSegment(samples_array.tobytes(), frame_rate=48000, sample_width=2, channels=1)
-        audio_file.export(output_path, format=format)
+    def save_to_file(self, audio, output_path, output_format="aac"):
+        audio.export(output_path, format=output_format)
 
 
 # if __name__ == "__main__":
 #     input_file = "C:\\Users\\yoavz\\Desktop\\trimmed.wav"
 #     noise_remover = NoiseRemover()
-#     clean_array, wind_array = noise_remover.apply_filter(input_file)
+#     clean_audio, wind_audio = noise_remover.apply_filter(input_file)
 #     wind_output = "C:\\Users\\yoavz\\Desktop\\wind.wav"
 #     clean_output = "C:\\Users\\yoavz\\Desktop\\clear.wav"
-#     noise_remover.save_to_file(clean_array, clean_output)
-#     noise_remover.save_to_file(wind_array, wind_output)
+#     noise_remover.save_to_file(clean_audio, clean_output)
+#     noise_remover.save_to_file(wind_audio, wind_output)
