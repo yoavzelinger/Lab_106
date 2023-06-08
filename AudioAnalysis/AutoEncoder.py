@@ -35,33 +35,12 @@ class Autoencoder:
         self.decoder_kernels = conv_kernels[::-1]
         self.decoder_strides = conv_strides[::-1]
 
+        # Creating the model
         self.encoder = self._create_encoder()
         self.decoder = self._create_decoder()
 
         # Adding it all together
         self.total_model = self._create_total_model()
-
-    def summary(self):
-        self.encoder.summary()
-        self.decoder.summary()
-        self.total_model.summary()
-
-    def compile_model(self, learning_rate=0.0001):
-        optimizer, loss = Adam(learning_rate=learning_rate), Mse()
-        self.total_model.compile(optimizer=optimizer, loss=loss)
-
-    def train_model(self, x_train, batch_size, epochs_count):
-        self.total_model.fit(x=x_train, y=x_train, batch_size=batch_size, epochs=epochs_count)
-
-    def save_model(self, save_folder):
-        if not os.path.exists(save_folder):
-            os.makedirs(save_folder)
-        parameters = [self._input_shape, self.encoder_filters, self.encoder_kernels, self.encoder_strides,self.latent_space_dim]
-        save_path = os.path.join(save_folder, "parameters.pkl")
-        with open(save_path, "wb") as f:
-            pickle.dump(parameters, f)
-        save_path = os.path.join(save_folder, "weights.h5")
-        self.total_model.save_weights(save_path)
 
     def _create_total_model(self):
         model_input = self._model_input
@@ -120,6 +99,27 @@ class Autoencoder:
         convolution_details = zip(self.decoder_filters, self.decoder_kernels, self.decoder_strides)
         return self._apply_convolutions(reverting_input, convolution_details, "decoder")
 
+    def compile_model(self, learning_rate=0.0001):
+        optimizer, loss = Adam(learning_rate=learning_rate), Mse()
+        self.total_model.compile(optimizer=optimizer, loss=loss)
+
+    def train_model(self, x_train, batch_size, epochs_count):
+        self.total_model.fit(x=x_train, y=x_train, batch_size=batch_size, epochs=epochs_count)
+
+    def summary(self):
+        self.encoder.summary()
+        self.decoder.summary()
+        self.total_model.summary()
+
+    def save_model(self, save_folder):
+        if not os.path.exists(save_folder):
+            os.makedirs(save_folder)
+        parameters = [self._input_shape, self.encoder_filters, self.encoder_kernels, self.encoder_strides,self.latent_space_dim]
+        save_path = os.path.join(save_folder, "parameters.pkl")
+        with open(save_path, "wb") as f:
+            pickle.dump(parameters, f)
+        save_path = os.path.join(save_folder, "weights.h5")
+        self.total_model.save_weights(save_path)
 
 # if __name__ == "__main__":
 #     autoencoder = Autoencoder(
