@@ -48,12 +48,7 @@ class Autoencoder:
         model_output = self.decoder(encoder_output)
         return Model(model_input, model_output, name="autoencoder")
 
-    def _apply_convolutions(self, convolution_input, convolutions_details, direction_str):
-        current_input = convolution_input
-        for layer_index, layer_info in enumerate(convolutions_details):
-            current_input = self._apply_convolution_layer(current_input, layer_index, layer_info, direction_str)
-        return current_input
-
+    # Mutual step (encoder and decoder) - applying convolution layers
     def _apply_convolution_layer(self, layer_input, layer_index, layer_info, direction_str):
         conv_filter, kernel, stride = layer_info
         layer_desc = direction_str + "_{0}_layer_" + str(layer_index + 1)
@@ -65,6 +60,12 @@ class Autoencoder:
         current_input = current_conv(layer_input)
         current_input = current_relu(current_input)
         return current_bn(current_input)
+
+    def _apply_convolutions(self, convolution_input, convolutions_details, direction_str):
+        current_input = convolution_input
+        for layer_index, layer_info in enumerate(convolutions_details):
+            current_input = self._apply_convolution_layer(current_input, layer_index, layer_info, direction_str)
+        return current_input
 
     # ENCODER PART
     def _create_encoder(self):
@@ -114,12 +115,17 @@ class Autoencoder:
     def save_model(self, save_folder):
         if not os.path.exists(save_folder):
             os.makedirs(save_folder)
-        parameters = [self._input_shape, self.encoder_filters, self.encoder_kernels, self.encoder_strides,self.latent_space_dim]
+        parameters = [self._input_shape,
+                      self.encoder_filters,
+                      self.encoder_kernels,
+                      self.encoder_strides,
+                      self.latent_space_dim]
         save_path = os.path.join(save_folder, "parameters.pkl")
         with open(save_path, "wb") as f:
             pickle.dump(parameters, f)
         save_path = os.path.join(save_folder, "weights.h5")
         self.total_model.save_weights(save_path)
+
 
 # if __name__ == "__main__":
 #     autoencoder = Autoencoder(
