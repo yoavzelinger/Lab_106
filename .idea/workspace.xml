@@ -5,7 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="382f54c1-eb8e-4541-839a-433fb2fee533" name="Changes" comment=".">
+      <change afterPath="$PROJECT_DIR$/AudioAnalysis/Autoencoder.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AudioAnalysis/AutoEncoder.py" beforeDir="false" afterPath="$PROJECT_DIR$/AudioAnalysis/TwoDimensionsEncoder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AudioAnalysis/Convert_Input.py" beforeDir="false" afterPath="$PROJECT_DIR$/AudioAnalysis/Convert_Input.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AudioAnalysis/NoiseRemoval.py" beforeDir="false" afterPath="$PROJECT_DIR$/AudioAnalysis/NoiseRemoval.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AudioAnalysis/TotalTesting.py" beforeDir="false" afterPath="$PROJECT_DIR$/AudioAnalysis/TotalTesting.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,21 +50,20 @@
   }
 }</component>
   <component name="RunManager" selected="Python.TotalTesting">
-    <configuration name="AutoEncoder" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+    <configuration name="Autoencoder" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Lab_106" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="C:\Users\yoavz\anaconda3\python.exe" />
-      <option name="SDK_NAME" value="Python 3.8" />
+      <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/AudioAnalysis" />
-      <option name="IS_MODULE_SDK" value="false" />
+      <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/AudioAnalysis/AutoEncoder.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/AudioAnalysis/Autoencoder.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -91,10 +95,39 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="TwoDimensionsEncoder" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="Lab_106" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\yoavz\anaconda3\python.exe" />
+      <option name="SDK_NAME" value="Python 3.8" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/AudioAnalysis" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\yoavz\Documents\GitHub\Lab_106\AudioAnalysis\TwoDimensionsEncoder.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <list>
-      <item itemvalue="Python.AutoEncoder" />
+      <item itemvalue="Python.TwoDimensionsEncoder" />
       <item itemvalue="Python.TotalTesting" />
+      <item itemvalue="Python.Autoencoder" />
     </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.Autoencoder" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -105,7 +138,15 @@
       <option name="presentableId" value="Default" />
       <updated>1686161281335</updated>
       <workItem from="1686161283151" duration="3729000" />
-      <workItem from="1686216885122" duration="452000" />
+      <workItem from="1686216885122" duration="4691000" />
+      <workItem from="1686237262422" duration="622000" />
+      <workItem from="1686585974005" duration="1405000" />
+      <workItem from="1686590186738" duration="2853000" />
+      <workItem from="1686674846113" duration="8165000" />
+      <workItem from="1686729201499" duration="9975000" />
+      <workItem from="1686740612159" duration="4138000" />
+      <workItem from="1686744856952" duration="5295000" />
+      <workItem from="1686752315391" duration="3935000" />
     </task>
     <task id="LOCAL‎-00001" summary="Adding save operation to the encoder">
       <created>1686164492222</created>
@@ -128,7 +169,14 @@
       <option name="project" value="LOCAL‎" />
       <updated>1686217253164</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL‎-00004" summary=".">
+      <created>1686217481019</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL‎-00004" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1686217481019</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -140,7 +188,8 @@
     <option name="LAST_COMMIT_MESSAGE" value="." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Lab_106$AutoEncoder.coverage" NAME="AutoEncoder Coverage Results" MODIFIED="1686164684420" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/AudioAnalysis" />
-    <SUITE FILE_PATH="coverage/Lab_106$TotalTesting.coverage" NAME="TotalTesting Coverage Results" MODIFIED="1686164843014" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/AudioAnalysis" />
+    <SUITE FILE_PATH="coverage/Lab_106$AutoEncoder.coverage" NAME="AutoEncoder Coverage Results" MODIFIED="1686218790806" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/AudioAnalysis" />
+    <SUITE FILE_PATH="coverage/Lab_106$TotalTesting.coverage" NAME="TotalTesting Coverage Results" MODIFIED="1686755915538" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/AudioAnalysis" />
+    <SUITE FILE_PATH="coverage/Lab_106$Autoencoder.coverage" NAME="Autoencoder Coverage Results" MODIFIED="1686748001123" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/AudioAnalysis" />
   </component>
 </project>

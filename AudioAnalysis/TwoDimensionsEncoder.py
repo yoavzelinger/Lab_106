@@ -13,13 +13,13 @@ def load_model(load_folder):
     parameters_path = os.path.join(load_folder, "parameters.pkl")
     with open(parameters_path, "rb") as f:
         parameters = pickle.load(f)
-    autoencoder = Autoencoder(*parameters)
+    two_dimensions_encoder = TwoDimensionsEncoder(*parameters)
     weights_path = os.path.join(load_folder, "weights.h5")
-    autoencoder.total_model.load_weights(weights_path)
-    return autoencoder
+    two_dimensions_encoder.total_model.load_weights(weights_path)
+    return two_dimensions_encoder
 
 
-class Autoencoder:
+class TwoDimensionsEncoder:
     def __init__(self, input_shape, conv_filters, conv_kernels, conv_strides, latent_space_dim):
         self._input_shape = input_shape
         self._model_input = Input(shape=input_shape, name="encoder_input")
@@ -115,24 +115,24 @@ class Autoencoder:
     def save_model(self, save_folder):
         if not os.path.exists(save_folder):
             os.makedirs(save_folder)
-        parameters = [self._input_shape,
-                      self.encoder_filters,
-                      self.encoder_kernels,
-                      self.encoder_strides,
-                      self.latent_space_dim]
-        save_path = os.path.join(save_folder, "parameters.pkl")
-        with open(save_path, "wb") as f:
-            pickle.dump(parameters, f)
+        # parameters = [self._input_shape,
+        #               self.encoder_filters,
+        #               self.encoder_kernels,
+        #               self.encoder_strides,
+        #               self.latent_space_dim]
+        # save_path = os.path.join(save_folder, "parameters.pkl")
+        # with open(save_path, "wb") as f:
+        #     pickle.dump(parameters, f)
         save_path = os.path.join(save_folder, "weights.h5")
         self.total_model.save_weights(save_path)
 
 
-# if __name__ == "__main__":
-#     autoencoder = Autoencoder(
-#         input_shape=(28, 28, 1),
-#         conv_filters=(32, 64, 64, 64),
-#         conv_kernels=(3, 3, 3, 3),
-#         conv_strides=(1, 2, 2, 1),
-#         latent_space_dim=2
-#     )
-#     autoencoder.summary()
+if __name__ == "__main__":
+    autoencoder = TwoDimensionsEncoder(
+        input_shape=(28, 28, 1),
+        conv_filters=(32, 64, 64, 64),
+        conv_kernels=(3, 3, 3, 3),
+        conv_strides=(1, 2, 2, 1),
+        latent_space_dim=2
+    )
+    autoencoder.summary()

@@ -68,11 +68,11 @@ class NoiseRemover:
         audio.export(output_path, format=output_format)
 
 
-# if __name__ == "__main__":
-#     input_file = "C:\\Users\\yoavz\\Desktop\\trimmed.wav"
-#     noise_remover = NoiseRemover()
-#     clean_audio, wind_audio = noise_remover.apply_filter(input_file)
-#     wind_output = "C:\\Users\\yoavz\\Desktop\\wind.wav"
-#     clean_output = "C:\\Users\\yoavz\\Desktop\\clear.wav"
-#     noise_remover.save_to_file(clean_audio, clean_output)
-#     noise_remover.save_to_file(wind_audio, wind_output)
+if __name__ == "__main__":
+    input_file = "C:\\Users\\yoavz\\Desktop\\trimmed.wav"
+    noise_remover = NoiseRemover()
+    clean_audio, wind_audio = noise_remover.apply_filter(input_file)
+    wind_output = "C:\\Users\\yoavz\\Desktop\\wind.wav"
+    clean_output = "C:\\Users\\yoavz\\Desktop\\clear.wav"
+    noise_remover.save_to_file(clean_audio, clean_output)
+    noise_remover.save_to_file(wind_audio, wind_output)

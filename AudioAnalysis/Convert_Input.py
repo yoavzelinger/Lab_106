@@ -65,7 +65,7 @@ def files_gen(input_type: str, search_flag: chr, source_path: str) -> str:
             print(f"Invalid path type: {search_flag}")
 
 
-# if __name__ == "__main__":
-#     print("Welcome")
-#     if len(sys.argv) - 1 in range(3, 5):
-#         convert_files(*sys.argv[1:])
+if __name__ == "__main__":
+    print("Welcome")
+    if len(sys.argv) - 1 in range(3, 5):
+        convert_files(*sys.argv[1:])
