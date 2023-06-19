@@ -1,3 +1,5 @@
+import sys
+
 import NoiseRemoval
 from Autoencoder import Autoencoder
 import os
@@ -8,7 +10,7 @@ np.warnings.filterwarnings('ignore', category=np.VisibleDeprecationWarning)
 LEARNING_RATE = 0.0005
 BATCH_SIZE = 3
 EPOCHS = 1
-INPUT_FOLDER = "C:\\Users\\yoavz\\Documents\\Inbal_Project\\Testing"
+# INPUT_FOLDER = "C:\\Users\\yoavz\\Documents\\Inbal_Project\\Testing"
 WINDOW = 5000  # ms
 OVERLAP = 1000  # ms
 
@@ -46,11 +48,9 @@ def create_train(input_folder, window_ms, overlap_ms):
 
 
 if __name__ == "__main__":
+    INPUT_FOLDER = sys.argv[1]
     x_train = create_train(INPUT_FOLDER, WINDOW, OVERLAP)
     current = x_train[0]
-    # for x in x_train:
-    #     print(current == x)
-    #     a = 3
 
     print("Finished creating x_train")
     autoencoder = Autoencoder()
