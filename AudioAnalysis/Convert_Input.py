@@ -16,7 +16,7 @@ def convert_to_pcm(root_path, output_path):
         output_path = root_path[:-3] + "aac"
     else:
         output_path = output_path + root_path[root_path.rfind('\\'):-3] + "aac"
-    stream = ffmpeg.input(root_path, t="00:05:00")
+    stream = ffmpeg.input(root_path)
     stream = ffmpeg.output(stream, output_path, acodec='aac', ac=1, ar=48000, audio_bitrate=45000)
     ffmpeg.run(stream)
     return output_path
