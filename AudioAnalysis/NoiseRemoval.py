@@ -1,7 +1,6 @@
-import numpy as np
 from pydub import AudioSegment
 import matplotlib.pyplot as plt
-
+import numpy as np
 
 class NoiseRemover:
     def __init__(self):
