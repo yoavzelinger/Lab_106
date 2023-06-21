@@ -4,6 +4,7 @@ import NoiseRemoval
 from Autoencoder import Autoencoder
 import os
 import numpy as np
+import pickle
 
 np.warnings.filterwarnings('ignore', category=np.VisibleDeprecationWarning)
 
@@ -61,5 +62,11 @@ if __name__ == "__main__":
     print("Finished trying model")
     origin_sample = x_train[0][0][0]
     predicted_sample = autoencoder.predict(x_train[0][0][0])
-    for a, b in zip(origin_sample, predicted_sample):
-        print(f"Origin: {a}, Prediction: {b}")
+    print("Saving files")
+    with open('origin.pkl', 'wb') as f:
+        pickle.dump(origin_sample, f)
+    with open('predicted.pkl', 'wb') as f:
+        pickle.dump(origin_sample, f)
+    print("Done")
+    # for a, b in zip(origin_sample, predicted_sample):
+    #     print(f"Origin: {a}, Prediction: {b}")
