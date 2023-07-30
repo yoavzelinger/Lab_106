@@ -1,7 +1,7 @@
 import numpy as np
-from keras import losses, models, optimizers
+from keras import models, optimizers, callbacks
 from keras.activations import relu, softmax
-from keras.layers import (Convolution1D, Dense, Dropout, GlobalMaxPool1D, Input, MaxPool1D)
+from keras.layers import (Convolution1D, Dense, GlobalMaxPool1D, Input, MaxPool1D)
 from keras.layers import (Conv1DTranspose, Reshape, UpSampling1D, Dropout)
 import os
 
@@ -9,7 +9,7 @@ import os
 class Autoencoder:
     def __init__(self, sample_length_ms=5000, frame_rate=48000, n_classes=2):
         # TODO - Check if n_classes is two in our case
-        self.input_length = int(sample_length_ms * frame_rate / 1000)   # TODO - Check compatibility with last samples
+        self.input_length = int(sample_length_ms * frame_rate / 1000)
         self.model_input = Input(shape=(self.input_length, 1))
 
         self.n_classes = n_classes
@@ -56,7 +56,7 @@ class Autoencoder:
         x = Dropout(rate=0.2)(x)
 
         x = Dense(64, activation=relu)(x)
-        x = Dense(1028, activation=relu)(x) # TODO - Check how to modify to make it run faster
+        x = Dense(1028, activation=relu)(x)  # TODO - Check how to modify to make it run faster
         out = Dense(self.n_classes, activation=softmax)(x)
 
         return models.Model(inputs=self.model_input, outputs=out, name="encoder")
@@ -111,12 +111,15 @@ class Autoencoder:
 
         return models.Model(inputs=self.model_input, outputs=out)
 
-    def compile_model(self, learning_rate=0.0001):
-        opt = optimizers.Adam(learning_rate)
-        self.auto_encoder.compile(optimizer=opt, loss=losses.binary_crossentropy, metrics=['acc'])
+    def compile_model(self, learning_rate=0.001):
+        self.auto_encoder.compile(optimizer=optimizers.Adam(learning_rate=learning_rate), loss='mean_squared_error', run_eagerly=True)
 
-    def train_model(self, x_train, batch_size, epochs_count):
-        self.auto_encoder.fit(x=x_train, y=x_train, batch_size=batch_size, epochs=epochs_count)
+    def train_model(self, x_train, batch_size=32, epochs_count=1, validation_size=0.8):
+        split_idx = int(validation_size * len(x_train))
+        x_train_split = x_train[:split_idx]
+        x_val_split = x_train[split_idx:]
+        reduce_lr = callbacks.ReduceLROnPlateau(monitor='val_loss', factor=0.1, patience=5, min_lr=0.00001)
+        self.auto_encoder.fit(x_train_split, x_train_split, batch_size=batch_size, epochs=epochs_count, validation_data=(x_val_split, x_val_split), callbacks=[reduce_lr])
 
     def predict(self, x):
         return self.auto_encoder.predict(x)

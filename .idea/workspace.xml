@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="382f54c1-eb8e-4541-839a-433fb2fee533" name="Changes" comment=".">
-      <change afterPath="$PROJECT_DIR$/AudioAnalysis/Autoencoder.py" afterDir="false" />
+    <list default="true" id="382f54c1-eb8e-4541-839a-433fb2fee533" name="Changes" comment="switching import order">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AudioAnalysis/AutoEncoder.py" beforeDir="false" afterPath="$PROJECT_DIR$/AudioAnalysis/TwoDimensionsEncoder.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AudioAnalysis/Convert_Input.py" beforeDir="false" afterPath="$PROJECT_DIR$/AudioAnalysis/Convert_Input.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AudioAnalysis/NoiseRemoval.py" beforeDir="false" afterPath="$PROJECT_DIR$/AudioAnalysis/NoiseRemoval.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AudioAnalysis/Autoencoder.py" beforeDir="false" afterPath="$PROJECT_DIR$/AudioAnalysis/Autoencoder.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AudioAnalysis/TotalTesting.py" beforeDir="false" afterPath="$PROJECT_DIR$/AudioAnalysis/TotalTesting.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -147,6 +144,16 @@
       <workItem from="1686740612159" duration="4138000" />
       <workItem from="1686744856952" duration="5295000" />
       <workItem from="1686752315391" duration="3935000" />
+      <workItem from="1687078951307" duration="1226000" />
+      <workItem from="1687209421532" duration="2515000" />
+      <workItem from="1687331049342" duration="1605000" />
+      <workItem from="1687333581898" duration="643000" />
+      <workItem from="1690189781458" duration="497000" />
+      <workItem from="1690302701336" duration="84000" />
+      <workItem from="1690383027370" duration="729000" />
+      <workItem from="1690383773719" duration="2408000" />
+      <workItem from="1690386435205" duration="5133000" />
+      <workItem from="1690706960288" duration="829000" />
     </task>
     <task id="LOCAL‎-00001" summary="Adding save operation to the encoder">
       <created>1686164492222</created>
@@ -176,7 +183,42 @@
       <option name="project" value="LOCAL‎" />
       <updated>1686217481019</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL‎-00005" summary=".">
+      <created>1687079000715</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL‎-00005" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1687079000715</updated>
+    </task>
+    <task id="LOCAL‎-00006" summary="making testing takes file folder from command line">
+      <created>1687209903964</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL‎-00006" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1687209903964</updated>
+    </task>
+    <task id="LOCAL‎-00007" summary="removing trimming aac output to start 5minutes">
+      <created>1687212130542</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL‎-00007" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1687212130542</updated>
+    </task>
+    <task id="LOCAL‎-00008" summary="saving files instead of printing">
+      <created>1687331419912</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL‎-00008" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1687331419912</updated>
+    </task>
+    <task id="LOCAL‎-00009" summary="switching import order">
+      <created>1687332235364</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL‎-00009" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1687332235364</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -185,11 +227,15 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Adding save operation to the encoder" />
     <MESSAGE value="." />
-    <option name="LAST_COMMIT_MESSAGE" value="." />
+    <MESSAGE value="making testing takes file folder from command line" />
+    <MESSAGE value="removing trimming aac output to start 5minutes" />
+    <MESSAGE value="saving files instead of printing" />
+    <MESSAGE value="switching import order" />
+    <option name="LAST_COMMIT_MESSAGE" value="switching import order" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Lab_106$AutoEncoder.coverage" NAME="AutoEncoder Coverage Results" MODIFIED="1686218790806" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/AudioAnalysis" />
-    <SUITE FILE_PATH="coverage/Lab_106$TotalTesting.coverage" NAME="TotalTesting Coverage Results" MODIFIED="1686755915538" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/AudioAnalysis" />
-    <SUITE FILE_PATH="coverage/Lab_106$Autoencoder.coverage" NAME="Autoencoder Coverage Results" MODIFIED="1686748001123" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/AudioAnalysis" />
+    <SUITE FILE_PATH="coverage/Lab_106$TotalTesting.coverage" NAME="TotalTesting Coverage Results" MODIFIED="1690707782077" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/AudioAnalysis" />
+    <SUITE FILE_PATH="coverage/Lab_106$Autoencoder.coverage" NAME="Autoencoder Coverage Results" MODIFIED="1690627372605" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/AudioAnalysis" />
   </component>
 </project>

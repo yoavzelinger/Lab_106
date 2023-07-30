@@ -31,7 +31,7 @@ def window_time_array(audio, window_ms, overlap_ms):
         time_window = audio_array[start_frame: end_frame]
         freq_window = np.fft.fft(time_window).real.tolist()
         if len(freq_window) == window_size:
-            freq_windows.append(np.transpose(np.array([[freq_window]]), axes=(0, 2, 1)))
+            freq_windows.append(np.transpose(np.array([freq_window]), axes=(1, 0)))
     return freq_windows
 
 
@@ -51,22 +51,22 @@ def create_train(input_folder, window_ms, overlap_ms):
 if __name__ == "__main__":
     INPUT_FOLDER = sys.argv[1]
     x_train = create_train(INPUT_FOLDER, WINDOW, OVERLAP)
-    current = x_train[0]
-
+    print(x_train.shape)
     print("Finished creating x_train")
     autoencoder = Autoencoder()
     print("Finished creating model")
     autoencoder.compile_model()
     print("Finished compiling model")
-    autoencoder.train_model(x_train[0], BATCH_SIZE, EPOCHS)
+    autoencoder.train_model(x_train)
     print("Finished trying model")
-    origin_sample = x_train[0][0][0]
-    predicted_sample = autoencoder.predict(x_train[0][0][0])
+    origin_sample = np.expand_dims(x_train[1], axis=0)
+    print(origin_sample.shape)
+    predicted_sample = autoencoder.predict(origin_sample)
     print("Saving files")
     with open('origin.pkl', 'wb') as f:
         pickle.dump(origin_sample, f)
     with open('predicted.pkl', 'wb') as f:
-        pickle.dump(origin_sample, f)
+        pickle.dump(predicted_sample, f)
     print("Done")
-    # for a, b in zip(origin_sample, predicted_sample):
+    # for a, b in zip(origin_sample[0], predicted_sample[0]):
     #     print(f"Origin: {a}, Prediction: {b}")
