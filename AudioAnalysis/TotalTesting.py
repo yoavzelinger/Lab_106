@@ -1,4 +1,6 @@
 import sys
+import matplotlib.pyplot as plt
+from sklearn.decomposition import PCA
 
 import NoiseRemoval
 from Autoencoder import Autoencoder
@@ -11,7 +13,7 @@ np.warnings.filterwarnings('ignore', category=np.VisibleDeprecationWarning)
 LEARNING_RATE = 0.0005
 BATCH_SIZE = 3
 EPOCHS = 1
-# INPUT_FOLDER = "C:\\Users\\yoavz\\Documents\\Inbal_Project\\Testing"
+INPUT_FOLDER = "C:\\Users\\yoavz\\Documents\\Inbal_Project\\Testing"
 WINDOW = 5000  # ms
 OVERLAP = 1000  # ms
 
@@ -48,10 +50,20 @@ def create_train(input_folder, window_ms, overlap_ms):
     return np.array(train, dtype=np.float64)
 
 
+def perform_pca(data):
+    origin_shape = data.shape
+    # data = data.squeeze(axis=2)
+    pca = PCA()
+    data = pca.fit_transform(data)
+    print(data.shape)
+    data = pca.inverse_transform(data)
+    return data.reshape(origin_shape)
+
+
 if __name__ == "__main__":
-    INPUT_FOLDER = sys.argv[1]
+    if len(sys.argv) > 1:
+        INPUT_FOLDER = sys.argv[1]
     x_train = create_train(INPUT_FOLDER, WINDOW, OVERLAP)
-    print(x_train.shape)
     print("Finished creating x_train")
     autoencoder = Autoencoder()
     print("Finished creating model")
@@ -60,7 +72,6 @@ if __name__ == "__main__":
     autoencoder.train_model(x_train)
     print("Finished trying model")
     origin_sample = np.expand_dims(x_train[1], axis=0)
-    print(origin_sample.shape)
     predicted_sample = autoencoder.predict(origin_sample)
     print("Saving files")
     with open('origin.pkl', 'wb') as f:
@@ -68,5 +79,3 @@ if __name__ == "__main__":
     with open('predicted.pkl', 'wb') as f:
         pickle.dump(predicted_sample, f)
     print("Done")
-    # for a, b in zip(origin_sample[0], predicted_sample[0]):
-    #     print(f"Origin: {a}, Prediction: {b}")
