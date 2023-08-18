@@ -1,6 +1,4 @@
 import sys
-import matplotlib.pyplot as plt
-from sklearn.decomposition import PCA
 
 import NoiseRemoval
 from Autoencoder import Autoencoder
@@ -11,9 +9,8 @@ import pickle
 np.warnings.filterwarnings('ignore', category=np.VisibleDeprecationWarning)
 
 LEARNING_RATE = 0.0005
-BATCH_SIZE = 3
-EPOCHS = 1
-INPUT_FOLDER = "C:\\Users\\yoavz\\Documents\\Inbal_Project\\Testing"
+BATCH_SIZE = 32
+EPOCHS = 100
 WINDOW = 5000  # ms
 OVERLAP = 1000  # ms
 
@@ -50,21 +47,11 @@ def create_train(input_folder, window_ms, overlap_ms):
     return np.array(train, dtype=np.float64)
 
 
-def perform_pca(data):
-    origin_shape = data.shape
-    # data = data.squeeze(axis=2)
-    pca = PCA()
-    data = pca.fit_transform(data)
-    print(data.shape)
-    data = pca.inverse_transform(data)
-    return data.reshape(origin_shape)
-
-
 if __name__ == "__main__":
     if len(sys.argv) > 1:
         INPUT_FOLDER = sys.argv[1]
     x_train = create_train(INPUT_FOLDER, WINDOW, OVERLAP)
-    print("Finished creating x_train")
+    print(f"Finished creating x_train with {len(x_train)} samples of shape {x_train[0].shape if len(x_train) else 0}")
     autoencoder = Autoencoder()
     print("Finished creating model")
     autoencoder.compile_model()

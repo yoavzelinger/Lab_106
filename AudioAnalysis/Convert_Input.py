@@ -3,7 +3,11 @@ import sys
 import os
 from pydub import AudioSegment
 import math
-import struct
+
+SEGMENT_SIZE = 300000  # ms
+WIDTH = 2  # 2 * 8bit
+CHANNELS = 1
+BIT_RATE = 48000
 
 
 def convert_to_pcm(root_path, output_path):
@@ -23,10 +27,6 @@ def convert_to_pcm(root_path, output_path):
 
 
 def divide_file(file_path):
-    SEGMENT_SIZE = 300000  # ms
-    WIDTH = 2  # 2 * 8bit
-    CHANNELS = 1
-    BIT_RATE = 48000
     sound = AudioSegment.from_file(file_path, format="raw", sample_width=WIDTH, channels=CHANNELS, frame_rate=BIT_RATE)
     segment_count = math.ceil(len(sound) / SEGMENT_SIZE)
     for segment_num in range(segment_count):
@@ -46,23 +46,25 @@ def convert_files(source_type: str, search_flag: chr, source_path: str, destinat
 
 
 def files_gen(input_type: str, search_flag: chr, source_path: str) -> str:
-    def from_type(file: str): return len(file) > 4 and file[-3:].upper() == input_type.upper()
-    match search_flag:
-        case 'f':
+    def from_type(file: str):
+        return len(file) > 4 and file[-3:].upper() == input_type.upper()
+
+    if search_flag in ['f', 'd', 'r']:
+        if search_flag == 'f':
             if from_type(source_path):
                 yield source_path
-        case 'd':
+        if search_flag == 'd':
             for file_path in os.scandir(source_path):
                 if file_path.is_file() and from_type(file_path.path):
                     yield file_path.path
-        case 'r':
+        if search_flag == 'r':
             for path, subdir, files in os.walk(source_path):
                 for file_name in files:
                     file_path = os.path.join(path, file_name)
                     if os.path.isfile(file_path) and from_type(file_path):
                         yield file_path
-        case _:
-            print(f"Invalid path type: {search_flag}")
+    else:
+        print(f"Invalid path type: {search_flag}")
 
 
 if __name__ == "__main__":

@@ -126,7 +126,7 @@ class Autoencoder:
 
         return models.Model(inputs=latent_inputs, outputs=out, name="decoder")
 
-    def compile_model(self, learning_rate=0.001):
+    def compile_model(self, learning_rate=0.01):
         self.auto_encoder.compile(optimizer=optimizers.Adam(learning_rate=learning_rate), loss='mean_squared_error', run_eagerly=True)
         print(self.auto_encoder.summary())
 
