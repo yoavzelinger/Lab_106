@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="382f54c1-eb8e-4541-839a-433fb2fee533" name="Changes" comment="increasing learning rate and minor fixes">
+    <list default="true" id="382f54c1-eb8e-4541-839a-433fb2fee533" name="Changes" comment="More informative functions names etc.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AudioAnalysis/Autoencoder.py" beforeDir="false" afterPath="$PROJECT_DIR$/AudioAnalysis/Autoencoder.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,6 +169,7 @@
       <workItem from="1692357664551" duration="8809000" />
       <workItem from="1692376677639" duration="955000" />
       <workItem from="1692431759834" duration="4232000" />
+      <workItem from="1693396877907" duration="2027000" />
     </task>
     <task id="LOCAL‎-00001" summary="Adding save operation to the encoder">
       <created>1686164492222</created>
@@ -255,7 +255,14 @@
       <option name="project" value="LOCAL‎" />
       <updated>1692377531078</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL‎-00013" summary="More informative functions names etc.">
+      <created>1693396939817</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL‎-00013" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1693396939817</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -272,18 +279,8 @@
     <MESSAGE value="making train more relevant" />
     <MESSAGE value="fixing train function" />
     <MESSAGE value="increasing learning rate and minor fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="increasing learning rate and minor fixes" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/AudioAnalysis/Autoencoder.py</url>
-          <line>106</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="More informative functions names etc." />
+    <option name="LAST_COMMIT_MESSAGE" value="More informative functions names etc." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Lab_106$AutoEncoder.coverage" NAME="AutoEncoder Coverage Results" MODIFIED="1686218790806" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/AudioAnalysis" />
