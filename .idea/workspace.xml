@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="382f54c1-eb8e-4541-839a-433fb2fee533" name="Changes" comment="fixing train function">
+    <list default="true" id="382f54c1-eb8e-4541-839a-433fb2fee533" name="Changes" comment="increasing learning rate and minor fixes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AudioAnalysis/Autoencoder.py" beforeDir="false" afterPath="$PROJECT_DIR$/AudioAnalysis/Autoencoder.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AudioAnalysis/TotalTesting.py" beforeDir="false" afterPath="$PROJECT_DIR$/AudioAnalysis/TotalTesting.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.txt" beforeDir="false" afterPath="$PROJECT_DIR$/README.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +22,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2Qt7ydacTXJLx5P4ZgeP0juoSxu" />
   <component name="ProjectLevelVcsManager">
@@ -167,7 +168,8 @@
       <workItem from="1692031766860" duration="3106000" />
       <workItem from="1692355578521" duration="950000" />
       <workItem from="1692357664551" duration="8809000" />
-      <workItem from="1692376677639" duration="186000" />
+      <workItem from="1692376677639" duration="955000" />
+      <workItem from="1692431759834" duration="4232000" />
     </task>
     <task id="LOCAL‎-00001" summary="Adding save operation to the encoder">
       <created>1686164492222</created>
@@ -246,7 +248,14 @@
       <option name="project" value="LOCAL‎" />
       <updated>1692361510254</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL‎-00012" summary="increasing learning rate and minor fixes">
+      <created>1692377531078</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL‎-00012" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1692377531078</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -262,11 +271,23 @@
     <MESSAGE value="Making learning rate dynamic&#10;fixing input shape to match the required" />
     <MESSAGE value="making train more relevant" />
     <MESSAGE value="fixing train function" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixing train function" />
+    <MESSAGE value="increasing learning rate and minor fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="increasing learning rate and minor fixes" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/AudioAnalysis/Autoencoder.py</url>
+          <line>106</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Lab_106$AutoEncoder.coverage" NAME="AutoEncoder Coverage Results" MODIFIED="1686218790806" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/AudioAnalysis" />
     <SUITE FILE_PATH="coverage/Lab_106$TotalTesting.coverage" NAME="TotalTesting Coverage Results" MODIFIED="1691515186077" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/AudioAnalysis" />
-    <SUITE FILE_PATH="coverage/Lab_106$Autoencoder.coverage" NAME="Autoencoder Coverage Results" MODIFIED="1692367387760" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/AudioAnalysis" />
+    <SUITE FILE_PATH="coverage/Lab_106$Autoencoder.coverage" NAME="Autoencoder Coverage Results" MODIFIED="1692436004404" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/AudioAnalysis" />
   </component>
 </project>

@@ -21,23 +21,14 @@ class Autoencoder:
 
         self.shape_before_GlobalMaxPool = None
 
-        self.encoder = self._create_encoder()
-        # self.encoder = self._new_encoder()
+        self.encoder = self._create_encoder3()
         encoder_output_shape = self.encoder.output_shape[1:]
 
-        self.decoder = self._create_decoder(encoder_output_shape)
-        # self.decoder = self._new_decoder()
+        self.decoder = self._create_decoder3(encoder_output_shape)
 
         self.auto_encoder = self._create_total_model()
 
         tf.random.set_seed(0)
-
-    def _get_dense_layers(self, bottleneck_size):
-        dense_layers = [self.input_size]
-        while dense_layers[-1] / self.input_size > bottleneck_size:
-            dense_layers.append(dense_layers[-1] // 2 + 1)
-        print(dense_layers)
-        return dense_layers
 
     def _create_total_model(self):
         model_input = self.model_input
@@ -45,23 +36,9 @@ class Autoencoder:
         model_output = self.decoder(encoder_output)
         return models.Model(model_input, model_output, name="autoencoder")
 
-    def _new_encoder(self):
-        x = self.model_input
-        for dense_layer in self._dense_layers[1: -1]:
-            x = Dense(units=dense_layer, activation=relu, kernel_regularizer=self._regularization)(x)
-        out = Dense(units=self._dense_layers[-1], activation=sigmoid, kernel_regularizer=self._regularization)(x)
-        return models.Model(inputs=self.model_input, outputs=out, name="encoder")
-
-    def _new_decoder(self):
-        latent_inputs = Input(self._dense_layers[-1])
-        x = latent_inputs
-        for dense_layer in reversed(self._dense_layers[1: -1]):
-            x = Dense(units=dense_layer, activation=relu, kernel_regularizer=self._regularization)(x)
-        out = Dense(units=self.input_size, activation=sigmoid, kernel_regularizer=self._regularization)(x)
-        return models.Model(inputs=latent_inputs, outputs=out, name="decoder")
-
-    #   Encoder
-    def _create_encoder(self):
+    # First Model - With Pooling
+    #   Encoder 1
+    def _create_encoder1(self):
         x = self.model_input
         x = Convolution1D(16, 9, activation=relu, padding="valid")(x)
         x = Convolution1D(16, 9, activation=relu, padding="valid")(x)
@@ -92,11 +69,9 @@ class Autoencoder:
 
         return models.Model(inputs=self.model_input, outputs=out, name="encoder")
 
-    #   Decoder
-    def _create_decoder(self, encoder_output_shape):
+    #   Decoder 1
+    def _create_decoder1(self, encoder_output_shape):
         latent_inputs = Input(shape=encoder_output_shape)
-
-        x = latent_inputs
 
         x = Dense(64, activation='relu')(latent_inputs)
         x = Dense(1028, activation='relu')(x)   # TODO - Check how to modify to make it run faster
@@ -125,6 +100,100 @@ class Autoencoder:
         out = Conv1DTranspose(1, 49, activation='sigmoid', padding='valid')(x)
 
         return models.Model(inputs=latent_inputs, outputs=out, name="decoder")
+
+    # Second Model - Removing pooling
+    #   Encoder2
+    def _create_encoder2(self):
+        x = self.model_input
+
+        x = Convolution1D(1, 9, activation=relu, padding="valid")(x)
+        x = Convolution1D(1, 9, activation=relu, padding="valid")(x)
+
+        x = tf.squeeze(x, axis=-1)
+        x = Dense(x.shape[1] / 16, activation=relu)(x)
+        x = tf.expand_dims(x, axis=2)
+
+        x = Convolution1D(1, 3, activation=relu, padding="valid")(x)
+        x = Convolution1D(1, 3, activation=relu, padding="valid")(x)
+
+        x = tf.squeeze(x, axis=-1)
+        x = Dense(x.shape[1] / 4, activation=relu)(x)
+        x = tf.expand_dims(x, axis=2)
+
+        x = Convolution1D(1, 3, activation=relu, padding="valid")(x)
+        x = Convolution1D(1, 3, activation=relu, padding="valid")(x)
+        x = tf.squeeze(x, axis=-1)
+        x = Dense(x.shape[1] / 4, activation=relu)(x)
+        x = tf.expand_dims(x, axis=2)
+
+        x = Convolution1D(1, 3, activation=relu, padding="valid")(x)
+        x = Convolution1D(1, 3, activation=relu, padding="valid")(x)
+
+        x = tf.squeeze(x, axis=-1)
+        x = Dense(1028, activation=relu)(x)
+        out = tf.expand_dims(x, axis=2)
+
+        return models.Model(inputs=self.model_input, outputs=out, name="encoder")
+
+    #   Decoder2
+    def _create_decoder2(self, encoder_output_shape):
+        latent_inputs = Input(shape=encoder_output_shape)
+
+        x = tf.squeeze(latent_inputs, axis=-1)
+        x = Dense(1028, activation='relu')(latent_inputs)
+        x = tf.expand_dims(x, axis=2)
+
+        x = Conv1DTranspose(1, 3, activation='relu', padding='valid')(x)
+        x = Conv1DTranspose(1, 3, activation='relu', padding='valid')(x)
+
+        x = tf.squeeze(latent_inputs, axis=-1)
+        x = Dense(x.shape[1] * 4, activation=relu)(x)
+        x = tf.expand_dims(x, axis=2)
+
+        x = Conv1DTranspose(1, 3, activation='relu', padding='valid')(x)
+        x = Conv1DTranspose(1, 3, activation='relu', padding='valid')(x)
+
+        x = tf.squeeze(latent_inputs, axis=-1)
+        x = Dense(x.shape[1] * 4, activation=relu)(x)
+        x = tf.expand_dims(x, axis=2)
+
+        x = Conv1DTranspose(1, 3, activation='relu', padding='valid')(x)
+        x = Conv1DTranspose(1, 3, activation='relu', padding='valid')(x)
+
+        x = tf.squeeze(latent_inputs, axis=-1)
+        x = Dense(x.shape[1] * 16, activation=relu)(x)
+        x = tf.expand_dims(x, axis=2)
+
+        x = Conv1DTranspose(1, 9, activation='relu', padding='valid')(x)
+
+        out = Conv1DTranspose(1, 9, activation='sigmoid', padding='valid')(x)
+
+
+        return models.Model(inputs=latent_inputs, outputs=out, name="decoder")
+
+    # Third model - Cut the neurons in half
+    #   Encoder 3
+    def _create_encoder3(self):
+        x = self.model_input
+        for dense_layer in self._dense_layers[1: -1]:
+            x = Dense(dense_layer, activation=relu, kernel_regularizer=self._regularization)(x)
+        out = Dense(self._dense_layers[-1], activation=sigmoid, kernel_regularizer=self._regularization)(x)
+        return models.Model(inputs=self.model_input, outputs=out, name="encoder")
+
+    #   Decoder 3
+    def _create_decoder3(self):
+        latent_inputs = Input(self._dense_layers[-1])
+        x = latent_inputs
+        for dense_layer in reversed(self._dense_layers[1: -1]):
+            x = Dense(dense_layer, activation=relu, kernel_regularizer=self._regularization)(x)
+        out = Dense(self.input_size, activation=sigmoid, kernel_regularizer=self._regularization)(x)
+        return models.Model(inputs=latent_inputs, outputs=out, name="decoder")
+
+    def _get_dense_layers(self, bottleneck_size):
+        dense_layers = [self.input_size]
+        while dense_layers[-1] / self.input_size > bottleneck_size:
+            dense_layers.append(dense_layers[-1] // 2 + 1)
+        return dense_layers
 
     def compile_model(self, learning_rate=0.01):
         self.auto_encoder.compile(optimizer=optimizers.Adam(learning_rate=learning_rate), loss='mean_squared_error', run_eagerly=True)
